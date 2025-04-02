@@ -5,7 +5,7 @@ define('DB_USERNAME', 'ES05_user');
 define('DB_PASSWORD', 'mia_password');
 define('DB_NAME', 'ES05');
 
-function login($nome, $password) {
+function login($username, $password) {
     // Connessione al database
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
@@ -14,7 +14,7 @@ function login($nome, $password) {
     }
 
     // Query per selezionare tutti i record dalla tabella users
-    $query = "SELECT UserID FROM utenti where username = '$username' and password = '$password';";
+    $query = "SELECT UserID FROM utente where Username = '$username' and Password = '$password';";
     
 
     // Esecuzione della query
