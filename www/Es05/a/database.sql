@@ -16,16 +16,17 @@ CREATE TABLE IF NOT EXISTS utente (
   UserID INT NOT NULL AUTO_INCREMENT ,
   Username VARCHAR(64) NOT NULL UNIQUE,
   Password VARCHAR(64) NOT NULL ,
+  email VARCHAR(64) NOT NULL UNIQUE,
   PRIMARY KEY (UserID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1000;
 SHOW TABLES; 
 SHOW CREATE TABLE utente;
 
 INSERT INTO utente (UserID, Username, Password 
-) VALUES (NULL, 'utente', 'prova');
+) VALUES (NULL, 'utente', 'prova','prova@gmail.com');
 
 INSERT INTO utente VALUES 
-(NULL, 'mrossi', '123'),
-(NULL, 'admin', 'admin');
+(NULL, 'mrossi', '123','mrossi@gmail.com'),
+(NULL, 'admin', 'admin','admin@gmail.com');
 
 SELECT * FROM utente;
