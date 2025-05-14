@@ -22,8 +22,7 @@ CREATE TABLE IF NOT EXISTS utente (
 SHOW TABLES; 
 SHOW CREATE TABLE utente;
 
-INSERT INTO utente (UserID, Username, Password 
-) VALUES (NULL, 'utente', 'prova','prova@gmail.com');
+INSERT INTO utente (UserID, Username, Password, email) VALUES (NULL, 'utente', 'prova','prova@gmail.com');
 
 INSERT INTO utente VALUES 
 (NULL, 'mrossi', '123','mrossi@gmail.com'),
