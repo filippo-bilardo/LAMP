@@ -42,19 +42,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php
 //Form di login
+
+$from = $_GET["from"] ?? "";
+
 $html_form = <<<FORM
 <form action="$_SERVER[PHP_SELF]" method="post">
   <label for="nome"> </label><input type="text" name="username" placeholder="Nome utente" required/><br />
   <label for="password"> </label><input type="password" name="password" placeholder="Password" required/><br />
   <label for="email"> </label><input type="text" name="email" placeholder="email" required/><br />
   <input type="submit" value="Register" /><input type="reset" value="Cancel" />
-  <input type="hidden" name="from" value="{$_GET['from']}" />
+  <input type="hidden" name="from" value="{$from}" />
   <p class='error'>$msg</p>
 </form>
 FORM;
 
 // Creo il codice html da visualizzare a seconda dei valori di $from e $retval
-  $html_out = "<p class='error'>$errmsg</p>";
+  $html_out = "<p class='error'>$msg</p>";
   $html_out .= $html_form;
   $html_out .= "<a href='index.php'>Torna alla Home Page</a>.<br />";
 ?>
