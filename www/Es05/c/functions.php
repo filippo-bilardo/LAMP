@@ -3,7 +3,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'ES05_user');
 define('DB_PASSWORD', 'mia_password');
-define('DB_NAME', 'ES05');
+define('DB_NAME', 'es05');
 
 function login($username, $password) {
     // Connessione al database
