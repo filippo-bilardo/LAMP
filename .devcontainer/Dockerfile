@@ -8,12 +8,20 @@ FROM mcr.microsoft.com/vscode/devcontainers/php:0-${VARIANT}
 ARG NODE_VERSION="lts/*"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
+# Il repository APT di Yarn ereditato dall'immagine base ha una chiave
+# obsoleta (NO_PUBKEY 62D54FD4003F6525) e non serve al progetto LAMP.
+# Rimuoverlo prima di apt-get update mantiene attiva la verifica delle firme.
+# Bullseye è archiviato: usare gli archivi ufficiali e consentire gli indici
+# storici scaduti solo per queste sorgenti, senza disabilitare le firme GPG.
 # Installazione di MariaDB client
-RUN apt-get update \
+RUN rm -f /etc/apt/sources.list.d/yarn.list \
+    && sed -i \
+        -e '/ bullseye/s|http://deb.debian.org|https://archive.debian.org|g' \
+        -e '/archive.debian.org.* bullseye/s|^deb |deb [check-valid-until=no] |' \
+        /etc/apt/sources.list \
+    && apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get install -y mariadb-client \ 
-    # in Alternativa - Installazione di MySQL
-    # && apt-get install -y mysql-server \
+    && apt-get install -y mariadb-client \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
